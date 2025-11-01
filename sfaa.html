@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SchuF Wi-Fi Access</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white shadow-lg rounded-2xl p-8 max-w-md w-full text-center overflow-hidden">
+    
+    <!-- Office Logo -->
+    <div class="mb-6">
+      <img src="SchuF_logo_and_slogan_without_background (1).png" alt="Office Logo" class="mx-auto w-60 object-contain" />
+    </div>
+
+    <!-- Office Info -->
+    <h1 class="text-[1.1rem] font-bold text-gray-800 mb-2 leading-tight break-words">
+      SchuF Armaturen und Apparatebau GmbH
+    </h1>
+    <p class="text-gray-600 mb-3 text-xs leading-relaxed">
+      An d. Guldenmühle 8, 65817 Eppstein<br>
+      Germany. <i data-feather="phone" class="inline w-3 h-3 text-black align-text-bottom"></i> +49 6198 571100
+    </p>
+
+    <!-- Language Selector -->
+    <div class="mb-6">
+      <label for="language" class="block text-xs font-medium text-gray-700 mb-1">🌐 Select Language</label>
+      <select id="language" class="border rounded-lg px-3 py-1 text-sm" onchange="changeLanguage()">
+        <option value="en" selected>English</option>
+        <option value="de">Deutsch (German)</option>
+        <option value="fr">Français (French)</option>
+        <option value="zh">中文 (Chinese)</option>
+      </select>
+    </div>
+    
+    <!-- QR Code Section -->
+    <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 mb-6">
+      <p id="scan-text" class="text-gray-700 font-medium mb-1">📶 Scan the QR to Connect Wi-Fi</p>
+      <p id="network-text" class="text-gray-600 text-sm mb-3">Network Name: <span class="font-semibold">SchuFVisitor</span></p>
+
+      <img src="sfaa_Qr.png" alt="WiFi QR Code" class="mx-auto w-48 h-48 object-contain mb-4" />
+
+      <button id="show-btn" onclick="revealPassword()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm">
+        Show Wi-Fi Password
+      </button>
+      <button id="copy-btn" onclick="copyPassword(event)" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg text-sm ml-2">
+        Copy Password
+      </button>
+
+      <!-- Hidden Password -->
+      <p id="password" class="text-gray-800 font-bold text-lg mt-3 hidden">
+        Password: <span id="wifi-pass">65817eppstein</span>
+      </p>
+    </div>
+
+    <p class="text-gray-400 text-[10px] mt-4">Created by Ela 28-08-2025</p>
+
+  </div>
+
+  <script>
+    feather.replace();
+
+    const translations = {
+      en: {
+        scan: "📶 Scan the QR to Connect Wi-Fi",
+        network: "Network Name:",
+        show: "Show Wi-Fi Password",
+        copy: "Copy Password",
+        copied: "✅ Copied!",
+        password: "Password:"
+      },
+      de: {
+        scan: "📶 QR-Code scannen, um WLAN zu verbinden",
+        network: "Netzwerkname:",
+        show: "WLAN-Passwort anzeigen",
+        copy: "Passwort kopieren",
+        copied: "✅ Kopiert!",
+        password: "Passwort:"
+      },
+      fr: {
+        scan: "📶 Scannez le QR pour vous connecter au Wi-Fi",
+        network: "Nom du réseau:",
+        show: "Afficher le mot de passe Wi-Fi",
+        copy: "Copier le mot de passe",
+        copied: "✅ Copié !",
+        password: "Mot de passe:"
+      },
+      zh: {
+        scan: "📶 扫描二维码连接Wi-Fi",
+        network: "网络名称:",
+        show: "显示Wi-Fi密码",
+        copy: "复制密码",
+        copied: "✅ 已复制!",
+        password: "密码:"
+      }
+    };
+
+    function changeLanguage() {
+      const lang = document.getElementById("language").value;
+      document.getElementById("scan-text").innerText = translations[lang].scan;
+      document.getElementById("network-text").innerHTML = `${translations[lang].network} <span class="font-semibold">SchuFVisitor</span>`;
+      document.getElementById("show-btn").innerText = translations[lang].show;
+      document.getElementById("copy-btn").innerText = translations[lang].copy;
+      document.getElementById("password").innerHTML = `${translations[lang].password} <span id="wifi-pass">65817eppstein</span>`;
+    }
+
+    function revealPassword() {
+      const passDiv = document.getElementById("password");
+      passDiv.classList.remove("hidden");
+      setTimeout(() => passDiv.classList.add("hidden"), 10000);
+    }
+
+    function copyPassword(event) {
+      const lang = document.getElementById("language").value;
+      const btn = event.target;
+      const pass = document.getElementById("wifi-pass").innerText;
+      navigator.clipboard.writeText(pass).then(() => {
+        btn.innerText = translations[lang].copied;
+        setTimeout(() => btn.innerText = translations[lang].copy, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
