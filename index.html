@@ -5,130 +5,215 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SchuF Wi-Fi Access</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/feather-icons"></script>
+  <style>
+    :root {
+      --schuf-blue: #17293a;
+      --schuf-orange: #CF5919;
+    }
+    body {
+      background: linear-gradient(180deg, #ffffff 0%, #f6f7f8 60%, #eef0f3 100%);
+    }
+    .company-card {
+      border: 1px solid #e5e7eb;
+      transition: all 0.3s ease;
+      background-color: #fff;
+    }
+    .company-card:hover {
+      background: linear-gradient(135deg, #ffffff 0%, #f3f5f7 100%);
+      box-shadow: 0 4px 15px rgba(23, 41, 58, 0.18);
+      border-color: var(--schuf-blue);
+      transform: translateY(-2px);
+    }
+    select {
+      border-color: #d1d5db;
+    }
+    select:focus {
+      border-color: var(--schuf-orange);
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(207, 89, 25, 0.3);
+    }
+    footer {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 30px;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-  <div class="bg-white shadow-lg rounded-2xl p-8 max-w-md w-full text-center">
-    
-    <!-- Office Logo -->
+
+<body class="flex items-center justify-center min-h-screen flex-col">
+
+  <div class="bg-white shadow-xl rounded-2xl p-10 max-w-3xl w-full text-center border-t-8"
+       style="border-color: var(--schuf-orange);">
+
+    <!-- Logo -->
     <div class="mb-6">
-      <img src="SchuF_logo_and_slogan_without_background (1).png" alt="Office Logo" class="mx-auto w-60 object-contain" />
+      <img src="SchuF_logo_MainPage1.png" alt="SchuF Logo"
+           class="mx-auto w-56 object-contain drop-shadow-md" />
     </div>
 
-    <!-- Office Info -->
-    <h1 class="text-2xl font-bold text-gray-800 mb-2">SchuF Speciality Valves India Private Limited</h1>
-    <p class="text-gray-600 mb-3 text-xs leading-relaxed">
-      6/16, Ponnandhampalayam, Kaniyur Post, Coimbatore<br>
-      Tamil Nadu-641659. <i data-feather="phone" class="inline w-3 h-3 text-black align-text-bottom"></i> 0422 616 4699
+    <!-- Welcome Text -->
+    <h1 class="text-3xl font-bold mb-2" id="welcome-text"
+        style="color: var(--schuf-blue);">
+      Welcome to SchuF
+    </h1>
+    <p class="text-gray-600 mb-6" id="select-text">
+      Select the Company name to get the Wi-Fi details
     </p>
 
     <!-- Language Selector -->
-    <div class="mb-6">
-      <label for="language" class="block text-xs font-medium text-gray-700 mb-1">🌐 Select Language</label>
-      <select id="language" class="border rounded-lg px-3 py-1 text-sm" onchange="changeLanguage()">
+    <div class="mb-8 flex justify-center items-center space-x-2">
+      <label for="language" class="text-sm font-medium text-gray-700">🌐</label>
+      <select id="language"
+        class="border rounded-md px-2 py-1 text-sm focus:ring-[var(--schuf-orange)] focus:border-[var(--schuf-orange)]"
+        onchange="changeLanguage()">
         <option value="en" selected>English</option>
         <option value="de">Deutsch (German)</option>
         <option value="fr">Français (French)</option>
         <option value="zh">中文 (Chinese)</option>
       </select>
     </div>
-    
-    <!-- QR Code Section -->
-    <div class="border-2 border-dashed border-gray-300 rounded-xl p-6 mb-6">
-      <p id="scan-text" class="text-gray-700 font-medium mb-1">📶 Scan the QR to Connect Wi-Fi</p>
-      <p id="network-text" class="text-gray-600 text-sm mb-3">Network Name: <span class="font-semibold">SchuF Visitor</span></p>
 
-      <img src="WiFi_Info_QR_new30082025.png" alt="WiFi QR Code" class="mx-auto w-48 h-48 object-contain mb-4" />
+    <!-- Company Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
 
-      <button id="show-btn" onclick="revealPassword()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm">
-        Show Wi-Fi Password
-      </button>
-      <button id="copy-btn" onclick="copyPassword(event)" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg text-sm ml-2">
-        Copy Password
-      </button>
+      <!-- Ireland -->
+      <div onclick="openLocation('sfvt')" class="p-6 company-card rounded-xl cursor-pointer">
+        <h2 class="text-lg font-semibold company-name text-[var(--schuf-blue)]"
+            data-en="SchuF Valve Technology GmbH"
+            data-de="SchuF Ventiltechnik GmbH"
+            data-fr="SchuF Valve Technology GmbH"
+            data-zh="SchuF 阀门技术有限公司">
+          SchuF Valve Technology GmbH
+        </h2>
+        <p class="text-sm text-gray-600 location"
+           data-en="Cork, Ireland"
+           data-de="Cork, Irland"
+           data-fr="Cork, Irlande"
+           data-zh="爱尔兰 科克">
+          Cork, Ireland
+        </p>
+        <p class="text-xs font-medium mt-1 text-[var(--schuf-orange)]">SFVT</p>
+      </div>
 
-      <!-- Hidden Password -->
-      <p id="password" class="text-gray-800 font-bold text-lg mt-3 hidden">
-        Password: <span id="wifi-pass">coimbatore641659</span>
-      </p>
+      <!-- Germany -->
+      <div onclick="openLocation('sfaa')" class="p-6 company-card rounded-xl cursor-pointer">
+        <h2 class="text-lg font-semibold company-name text-[var(--schuf-blue)]"
+            data-en="SchuF Armaturen und Apparatebau GmbH"
+            data-de="SchuF Armaturen und Apparatebau GmbH"
+            data-fr="SchuF Armaturen und Apparatebau GmbH"
+            data-zh="SchuF 阀门与设备制造有限公司">
+          SchuF Armaturen und Apparatebau GmbH
+        </h2>
+        <p class="text-sm text-gray-600 location"
+           data-en="Eppstein, Germany"
+           data-de="Eppstein, Deutschland"
+           data-fr="Eppstein, Allemagne"
+           data-zh="德国 埃普施泰因">
+          Eppstein, Germany
+        </p>
+        <p class="text-xs font-medium mt-1 text-[var(--schuf-orange)]">SFAA</p>
+      </div>
+
+      <!-- India -->
+      <div onclick="openLocation('sfin')" class="p-6 company-card rounded-xl cursor-pointer">
+        <h2 class="text-lg font-semibold company-name text-[var(--schuf-blue)]"
+            data-en="SchuF Speciality Valves India Pvt. Ltd."
+            data-de="SchuF Spezialventile Indien Pvt. Ltd."
+            data-fr="SchuF Valves Spécialisés Inde Pvt. Ltd."
+            data-zh="SchuF 特种阀门印度有限公司">
+          SchuF Speciality Valves India Pvt. Ltd.
+        </h2>
+        <p class="text-sm text-gray-600 location"
+           data-en="Coimbatore, India"
+           data-de="Coimbatore, Indien"
+           data-fr="Coimbatore, Inde"
+           data-zh="印度 哥印拜陀">
+          Coimbatore, India
+        </p>
+        <p class="text-xs font-medium mt-1 text-[var(--schuf-orange)]">SFIN</p>
+      </div>
+
+      <!-- Italy -->
+      <div onclick="openLocation('latv')" class="p-6 company-card rounded-xl cursor-pointer">
+        <h2 class="text-lg font-semibold company-name text-[var(--schuf-blue)]"
+            data-en="SchuF (Italy) S.r.l."
+            data-de="SchuF (Italien) S.r.l."
+            data-fr="SchuF (Italie) S.r.l."
+            data-zh="SchuF (意大利) S.r.l.">
+          SchuF (Italy) S.r.l.
+        </h2>
+        <p class="text-sm text-gray-600 location"
+           data-en="Bollate, Italy"
+           data-de="Bollate, Italien"
+           data-fr="Bollate, Italie"
+           data-zh="意大利 博拉泰">
+          Bollate, Italy
+        </p>
+        <p class="text-xs font-medium mt-1 text-[var(--schuf-orange)]">LATV</p>
+      </div>
+
+      <!-- USA -->
+      <div onclick="openLocation('fett')" class="p-6 company-card rounded-xl cursor-pointer">
+        <h2 class="text-lg font-semibold company-name text-[var(--schuf-blue)]"
+            data-en="Fetterolf Corporation USA"
+            data-de="Fetterolf Corporation USA"
+            data-fr="Fetterolf Corporation USA"
+            data-zh="费特罗夫公司 美国">
+          Fetterolf Corporation USA
+        </h2>
+        <p class="text-sm text-gray-600 location"
+           data-en="Skippack, USA"
+           data-de="Skippack, USA"
+           data-fr="Skippack, États-Unis"
+           data-zh="美国 斯基派克">
+          Skippack, USA
+        </p>
+        <p class="text-xs font-medium mt-1 text-[var(--schuf-orange)]">FETT</p>
+      </div>
+
     </div>
-
-    <!-- IT Support Contact -->
-    <div class="bg-gray-50 rounded-md p-2 mt-4">
-      <h2 class="text-sm font-semibold text-gray-700">IT Support</h2>
-      <p class="text-gray-500 text-xs">+91-4226164690 / 645</p>
-    </div>
-
-    <p class="text-gray-400 text-[10px] mt-4">Created by Ela 28-08-2025</p>
-
   </div>
 
-  <script>
-    feather.replace();
+  <!-- Footer -->
+  <footer class="mt-6 mb-4 text-center">
+    <p>Created by Ela (28-08-2025)</p>
+  </footer>
 
-    // Translation dictionary
-    const translations = {
-      en: {
-        scan: "📶 Scan the QR to Connect Wi-Fi",
-        network: "Network Name:",
-        show: "Show Wi-Fi Password",
-        copy: "Copy Password",
-        copied: "✅ Copied!",
-        password: "Password:"
-      },
-      de: {
-        scan: "📶 QR-Code scannen, um WLAN zu verbinden",
-        network: "Netzwerkname:",
-        show: "WLAN-Passwort anzeigen",
-        copy: "Passwort kopieren",
-        copied: "✅ Kopiert!",
-        password: "Passwort:"
-      },
-      fr: {
-        scan: "📶 Scannez le QR pour vous connecter au Wi-Fi",
-        network: "Nom du réseau:",
-        show: "Afficher le mot de passe Wi-Fi",
-        copy: "Copier le mot de passe",
-        copied: "✅ Copié !",
-        password: "Mot de passe:"
-      },
-      zh: {
-        scan: "📶 扫描二维码连接Wi-Fi",
-        network: "网络名称:",
-        show: "显示Wi-Fi密码",
-        copy: "复制密码",
-        copied: "✅ 已复制!",
-        password: "密码:"
-      }
+  <script>
+    function openLocation(code) {
+      window.location.href = code + ".html";
+    }
+
+    const uiTranslations = {
+      en: { welcome: "Welcome to SchuF", select: "Select the Company name to get the Wi-Fi details" },
+      de: { welcome: "Willkommen bei SchuF", select: "Wählen Sie den Firmennamen, um WLAN-Details zu erhalten" },
+      fr: { welcome: "Bienvenue chez SchuF", select: "Sélectionnez le nom de l’entreprise pour obtenir les détails du Wi-Fi" },
+      zh: { welcome: "欢迎来到 SchuF", select: "选择公司名称以获取 Wi-Fi 详细信息" }
     };
 
     function changeLanguage() {
       const lang = document.getElementById("language").value;
-      document.getElementById("scan-text").innerText = translations[lang].scan;
-      document.getElementById("network-text").innerHTML = `${translations[lang].network} <span class="font-semibold">SchuF Visitor</span>`;
-      document.getElementById("show-btn").innerText = translations[lang].show;
-      document.getElementById("copy-btn").innerText = translations[lang].copy;
-      document.getElementById("password").innerHTML = `${translations[lang].password} <span id="wifi-pass">coimbatore641659</span>`;
-    }
+      document.getElementById("welcome-text").textContent = uiTranslations[lang].welcome;
+      document.getElementById("select-text").textContent = uiTranslations[lang].select;
 
-    function revealPassword() {
-      const passDiv = document.getElementById("password");
-      passDiv.classList.remove("hidden");
-      setTimeout(() => {
-        passDiv.classList.add("hidden");
-      }, 10000);
-    }
+      document.querySelectorAll(".company-name").forEach(el => {
+        el.innerHTML = lang === "en"
+          ? el.dataset.en
+          : `${el.dataset.en}<br><span class='text-gray-500 text-sm'>(${el.dataset[lang]})</span>`;
+      });
 
-    function copyPassword(event) {
-      const lang = document.getElementById("language").value;
-      const btn = event.target;
-      const pass = document.getElementById("wifi-pass").innerText;
-      navigator.clipboard.writeText(pass).then(() => {
-        btn.innerText = translations[lang].copied;
-        setTimeout(() => btn.innerText = translations[lang].copy, 2000);
+      document.querySelectorAll(".location").forEach(el => {
+        el.innerHTML = lang === "en"
+          ? el.dataset.en
+          : `${el.dataset.en}<br><span class='text-gray-500 text-xs'>(${el.dataset[lang]})</span>`;
       });
     }
+
+    window.addEventListener("load", () => {
+      document.getElementById("language").value = "en";
+      changeLanguage();
+    });
   </script>
+
 </body>
 </html>
-
