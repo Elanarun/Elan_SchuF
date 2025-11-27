@@ -56,23 +56,18 @@
     </select>
 
     <!-- WiFi Instructions -->
-    <p id="scan-text" class="text-gray-700 font-semibold">📶 Scan the QR to Connect Wi-Fi</p>
+    <p id="scan-text" class="text-gray-700 font-semibold mb-2">📶 Connect to Wi-Fi</p>
 
     <p id="network-text" class="text-gray-600 text-sm mb-4">
-      Network Name: <span class="font-semibold">SchuF Visitor</span>
+      Network Name: <span class="font-semibold">SFIN Visitor</span>
     </p>
-
-    <!-- QR Code -->
-    <img src="WiFi_Info_QR_new30082025.png"
-      alt="QR Code"
-      class="mx-auto w-48 h-48 sm:w-56 sm:h-56 mb-4" />
 
     <!-- Buttons -->
     <div class="flex justify-center gap-3">
       <button id="show-btn"
         onclick="revealPassword()"
         class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg text-sm">
-        Show Wi-Fi Password
+        Get Wi-Fi Password
       </button>
 
       <button id="copy-btn"
@@ -84,7 +79,7 @@
 
     <!-- Hidden Password -->
     <p id="password" class="text-gray-900 font-bold text-lg mt-3 hidden">
-      Password: <span id="wifi-pass">coimbatore641659</span>
+      Password: <span id="wifi-pass">ConnectSchuF2025</span>
     </p>
 
     <!-- Footer -->
@@ -97,15 +92,15 @@
 
     const translations = {
       en: {
-        scan: "📶 Scan the QR to Connect Wi-Fi",
+        scan: "📶 Connect to Wi-Fi",
         network: "Network Name:",
-        show: "Show Wi-Fi Password",
+        show: "Get Wi-Fi Password",
         copy: "Copy Password",
         copied: "✅ Copied!",
         password: "Password:"
       },
       de: {
-        scan: "📶 QR-Code scannen, um WLAN zu verbinden",
+        scan: "📶 Mit WLAN verbinden",
         network: "Netzwerkname:",
         show: "WLAN-Passwort anzeigen",
         copy: "Passwort kopieren",
@@ -113,7 +108,7 @@
         password: "Passwort:"
       },
       fr: {
-        scan: "📶 Scannez le QR pour vous connecter au Wi-Fi",
+        scan: "📶 Connectez-vous au Wi-Fi",
         network: "Nom du réseau:",
         show: "Afficher le mot de passe Wi-Fi",
         copy: "Copier le mot de passe",
@@ -121,7 +116,7 @@
         password: "Mot de passe:"
       },
       zh: {
-        scan: "📶 扫描二维码连接Wi-Fi",
+        scan: "📶 连接Wi-Fi",
         network: "网络名称:",
         show: "显示Wi-Fi密码",
         copy: "复制密码",
@@ -134,11 +129,11 @@
       const lang = document.getElementById("language").value;
       document.getElementById("scan-text").innerText = translations[lang].scan;
       document.getElementById("network-text").innerHTML =
-        `${translations[lang].network} <span class="font-semibold">SchuF Visitor</span>`;
+        `${translations[lang].network} <span class="font-semibold">SFIN Visitor</span>`;
       document.getElementById("show-btn").innerText = translations[lang].show;
       document.getElementById("copy-btn").innerText = translations[lang].copy;
       document.getElementById("password").innerHTML =
-        `${translations[lang].password} <span id="wifi-pass">coimbatore641659</span>`;
+        `${translations[lang].password} <span id="wifi-pass">ConnectSchuF2025</span>`;
     }
 
     function revealPassword() {
