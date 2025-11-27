@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SchuF Wi-Fi Access</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/feather-icons"></script>
+
+  <style>
+    body {
+      transform-origin: center;
+    }
+
+    /* 📌 Auto scaling based on device size */
+    @media (max-width: 600px) {
+      body {
+        transform: scale(1.35);
+      }
+    }
+
+    @media (min-width: 601px) and (max-width: 1024px) {
+      body {
+        transform: scale(1.25);
+      }
+    }
+
+    @media (min-width: 1025px) {
+      body {
+        transform: scale(1.15);
+      }
+    }
+  </style>
 </head>
 
 <body class="bg-gray-100 h-screen w-screen flex items-center justify-center">
@@ -14,14 +41,14 @@
 
     <!-- Logo -->
     <img src="SchuF_logo_and_slogan_without_background (1).png"
-         alt="Logo"
-         class="mx-auto w-56 sm:w-64 mb-6" />
+      alt="Logo"
+      class="mx-auto w-56 sm:w-64 mb-6" />
 
-    <!-- Language -->
+    <!-- Language Selector -->
     <label class="text-sm font-medium text-gray-700 block">🌐 Select Language</label>
     <select id="language"
-            class="border rounded-lg px-3 py-1 text-sm mb-6 mx-auto"
-            onchange="changeLanguage()">
+      class="border rounded-lg px-3 py-1 text-sm mb-6 mx-auto"
+      onchange="changeLanguage()">
       <option value="en" selected>English</option>
       <option value="de">Deutsch</option>
       <option value="fr">Français</option>
@@ -30,26 +57,27 @@
 
     <!-- WiFi Instructions -->
     <p id="scan-text" class="text-gray-700 font-semibold">📶 Scan the QR to Connect Wi-Fi</p>
+
     <p id="network-text" class="text-gray-600 text-sm mb-4">
       Network Name: <span class="font-semibold">SchuF Visitor</span>
     </p>
 
     <!-- QR Code -->
     <img src="WiFi_Info_QR_new30082025.png"
-         alt="QR Code"
-         class="mx-auto w-44 h-44 sm:w-52 sm:h-52 mb-4" />
+      alt="QR Code"
+      class="mx-auto w-48 h-48 sm:w-56 sm:h-56 mb-4" />
 
     <!-- Buttons -->
     <div class="flex justify-center gap-3">
       <button id="show-btn"
-              onclick="revealPassword()"
-              class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm">
+        onclick="revealPassword()"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg text-sm">
         Show Wi-Fi Password
       </button>
 
       <button id="copy-btn"
-              onclick="copyPassword(event)"
-              class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded-lg text-sm">
+        onclick="copyPassword(event)"
+        class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-5 py-2 rounded-lg text-sm">
         Copy Password
       </button>
     </div>
@@ -68,10 +96,38 @@
     feather.replace();
 
     const translations = {
-      en: { scan:"📶 Scan the QR to Connect Wi-Fi", network:"Network Name:", show:"Show Wi-Fi Password", copy:"Copy Password", copied:"✅ Copied!", password:"Password:" },
-      de: { scan:"📶 QR-Code scannen, um WLAN zu verbinden", network:"Netzwerkname:", show:"WLAN-Passwort anzeigen", copy:"Passwort kopieren", copied:"✅ Kopiert!", password:"Passwort:" },
-      fr: { scan:"📶 Scannez le QR pour vous connecter au Wi-Fi", network:"Nom du réseau:", show:"Afficher le mot de passe Wi-Fi", copy:"Copier le mot de passe", copied:"✅ Copié !", password:"Mot de passe:" },
-      zh: { scan:"📶 扫描二维码连接Wi-Fi", network:"网络名称:", show:"显示Wi-Fi密码", copy:"复制密码", copied:"✅ 已复制!", password:"密码:" }
+      en: {
+        scan: "📶 Scan the QR to Connect Wi-Fi",
+        network: "Network Name:",
+        show: "Show Wi-Fi Password",
+        copy: "Copy Password",
+        copied: "✅ Copied!",
+        password: "Password:"
+      },
+      de: {
+        scan: "📶 QR-Code scannen, um WLAN zu verbinden",
+        network: "Netzwerkname:",
+        show: "WLAN-Passwort anzeigen",
+        copy: "Passwort kopieren",
+        copied: "✅ Kopiert!",
+        password: "Passwort:"
+      },
+      fr: {
+        scan: "📶 Scannez le QR pour vous connecter au Wi-Fi",
+        network: "Nom du réseau:",
+        show: "Afficher le mot de passe Wi-Fi",
+        copy: "Copier le mot de passe",
+        copied: "✅ Copié !",
+        password: "Mot de passe:"
+      },
+      zh: {
+        scan: "📶 扫描二维码连接Wi-Fi",
+        network: "网络名称:",
+        show: "显示Wi-Fi密码",
+        copy: "复制密码",
+        copied: "✅ 已复制!",
+        password: "密码:"
+      }
     };
 
     function changeLanguage() {
@@ -104,4 +160,5 @@
   </script>
 
 </body>
+
 </html>
